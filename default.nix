@@ -20,6 +20,7 @@
         system = "x86_64-linux";
         config.allowUnfree = true;
       };
+      nixpkgs = sources.nixpkgs;
       modulesPath = sources.nixpkgs;
       undetected.nixosModules.default = "${sources.nixpkgs}/nixos/modules/installer/scan/not-detected.nix";
       disko.nixosModules.default = import "${sources.disko}/module.nix";
@@ -28,9 +29,8 @@
 
       dpkgs = import sources.dpkgs { inherit (inputs) pkgs; };
       dlib = (import sources.dlib) {
-        inherit (inputs) pkgs dpkgs evalConfig;
+        inherit (inputs) pkgs dpkgs nixpkgs;
       };
-      evalConfig = import "${sources.nixpkgs}/nixos/lib/eval-config.nix";
     };
   outputs =
     { inputs, ... }:
@@ -45,6 +45,12 @@
             disko.nixosModules.default
             impermanence.nixosModules.default
             hjem.nixosModules.default
+            {
+              dlib = {
+                desktop.enable = true;
+                users = [ "dylan" ];
+              };
+            }
           ];
           modulesPath = ./modules;
         in

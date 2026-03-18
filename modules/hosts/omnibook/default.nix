@@ -8,8 +8,6 @@
   boot.plymouth = {
     enable = true;
   };
-
-  nixpkgs.config.allowUnfree = true;
   system.stateVersion = "25.11";
 
   environment.persistence."/persist" = {
@@ -20,10 +18,6 @@
     files = [
       "/etc/machine-id"
     ];
-    users.dylan = {
-      directories = [
-      ];
-    };
   };
 
   disko.devices = {
@@ -83,5 +77,4 @@
       };
     };
   };
-
 }

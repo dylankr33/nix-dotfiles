@@ -1,13 +1,14 @@
 {
   pkgs,
   dpkgs,
-  evalConfig,
+  nixpkgs,
 }:
 let
   inherit (pkgs) lib;
-  #
+  evalConfig = import "${nixpkgs}/nixos/lib/eval-config.nix";
   dlib = {
     mkDconf = import ./mkDconf.nix { inherit pkgs; };
+    nixpkgsPath = nixpkgs;
   };
 in
 {

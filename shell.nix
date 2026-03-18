@@ -1,6 +1,6 @@
 let
   sources = import ./npins;
-  pkgs = import sources.nixpkgs {};
+  pkgs = import sources.nixpkgs { };
 in
 pkgs.mkShell {
   buildInputs = with pkgs; [
@@ -9,5 +9,6 @@ pkgs.mkShell {
     npins
     nixos-anywhere
     rust-analyzer
+    nixfmt
   ];
 }

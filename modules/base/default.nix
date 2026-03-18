@@ -2,6 +2,7 @@
   modulesPath,
   pkgs,
   hostVars,
+  dlib,
   ...
 }:
 {
@@ -32,10 +33,9 @@
     settings.experimental-features = "nix-command flakes";
     registry.nixpkgs.to = {
       type = "path";
-      path = modulesPath;
+      path = dlib.nixpkgsPath;
     };
     channel.enable = false;
-    nixPath = [ "nixpkgs=/etc/nixos/nixpkgs" ];
   };
 
   i18n.defaultLocale = "en_US.UTF-8";
