@@ -1,0 +1,81 @@
+{
+  "pins": {
+    "disko": {
+      "type": "GitRelease",
+      "repository": {
+        "type": "GitHub",
+        "owner": "nix-community",
+        "repo": "disko"
+      },
+      "pre_releases": false,
+      "version_upper_bound": null,
+      "release_prefix": null,
+      "submodules": false,
+      "version": "v1.13.0",
+      "revision": "56ef5e72fec74b993ad0973b2dfa4eadeb48ba41",
+      "url": "https://api.github.com/repos/nix-community/disko/tarball/v1.13.0",
+      "hash": "03jz60kw0khm1lp72q65z8gq69bfrqqbj08kw0hbiav1qh3g7p08"
+    },
+    "hjem": {
+      "type": "Git",
+      "repository": {
+        "type": "GitHub",
+        "owner": "feel-co",
+        "repo": "hjem"
+      },
+      "branch": "main",
+      "submodules": false,
+      "revision": "7f2880d705edf541955d98f56cb78f9507384423",
+      "url": "https://github.com/feel-co/hjem/archive/7f2880d705edf541955d98f56cb78f9507384423.tar.gz",
+      "hash": "1jkscqcpbsamvj16w4l98snl0dzp3lk63azlvc7hrin8n1fyc5ym"
+    },
+    "impermanence": {
+      "type": "Git",
+      "repository": {
+        "type": "GitHub",
+        "owner": "nix-community",
+        "repo": "impermanence"
+      },
+      "branch": "master",
+      "submodules": false,
+      "revision": "7b1d382faf603b6d264f58627330f9faa5cba149",
+      "url": "https://github.com/nix-community/impermanence/archive/7b1d382faf603b6d264f58627330f9faa5cba149.tar.gz",
+      "hash": "1iip4kjrk09mnha9jhafvcg61g1d0g6pqnljzdp08zz6zk38jzyk"
+    },
+    "lem": {
+      "type": "GitRelease",
+      "repository": {
+        "type": "GitHub",
+        "owner": "lem-project",
+        "repo": "lem"
+      },
+      "pre_releases": false,
+      "version_upper_bound": null,
+      "release_prefix": null,
+      "submodules": false,
+      "version": "v2.3.0",
+      "revision": "38bae05a03bd6e6394819873fe5414b38da4753d",
+      "url": "https://api.github.com/repos/lem-project/lem/tarball/v2.3.0",
+      "hash": "0qkgs6xnbbnyjh9i1zp9l5iw6zj4hlb2b42b272pbmxw6pd3zp4a"
+    },
+    "nixpkgs": {
+      "type": "Channel",
+      "name": "nixos-25.11",
+      "url": "https://releases.nixos.org/nixos/25.11/nixos-25.11.6913.fabb8c9deee2/nixexprs.tar.xz",
+      "hash": "192yghx16vawmwzrbvkm5d341g02ymjxcmk108m3xdsarafhx0cs"
+    },
+    "sprinkles": {
+      "type": "Git",
+      "repository": {
+        "type": "Git",
+        "url": "https://codeberg.org/poacher/sprinkles"
+      },
+      "branch": "main",
+      "submodules": false,
+      "revision": "6fd1ae90adeff00e8b6229ac4db8a03d5b0a42c5",
+      "url": null,
+      "hash": "0r88703g8lhs5dmlxwzqz1f28cc1jrh57hacni8g4l1xpzkwj162"
+    }
+  },
+  "version": 5
+}
