@@ -5,7 +5,6 @@
 (import sprinkles).new {
   inherit overrides;
   sources = (import ./npins) // {
-    users = ./users;
     dlib = ./lib;
     dpkgs = ./pkgs;
   };
@@ -38,6 +37,8 @@
       inherit (inputs) dlib;
     in
     {
+      packages.x86_64-linux = { inherit (inputs.dpkgs) helium dWalls; };
+      devShells.x86_64-linux.default = import ./shell.nix { inherit (inputs) pkgs; };
       nixosConfigurations =
         let
           modules = with inputs; [
@@ -47,8 +48,14 @@
             hjem.nixosModules.default
             {
               dlib = {
-                desktop.enable = true;
-                users = [ "dylan" ];
+                desktop = {
+                  enable = true;
+                  steam = true;
+                };
+                dylan = {
+                  enable = true;
+                  features = [ "dev" ];
+                };
               };
             }
           ];

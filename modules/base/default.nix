@@ -1,5 +1,4 @@
 {
-  modulesPath,
   pkgs,
   hostVars,
   dlib,
@@ -37,6 +36,7 @@
     };
     channel.enable = false;
   };
+  nixpkgs.config.allowUnfree = true;
 
   i18n.defaultLocale = "en_US.UTF-8";
   console = {

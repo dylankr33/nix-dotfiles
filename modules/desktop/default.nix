@@ -7,6 +7,7 @@
   ...
 }:
 {
+  imports = [ ./steam.nix ];
   options.dlib.desktop.enable = lib.mkOption {
     type = lib.types.bool;
     default = false;

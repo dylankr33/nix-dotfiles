@@ -74,7 +74,8 @@
       "submodules": false,
       "revision": "6fd1ae90adeff00e8b6229ac4db8a03d5b0a42c5",
       "url": null,
-      "hash": "0r88703g8lhs5dmlxwzqz1f28cc1jrh57hacni8g4l1xpzkwj162"
+      "hash": "0r88703g8lhs5dmlxwzqz1f28cc1jrh57hacni8g4l1xpzkwj162",
+      "frozen": true
     }
   },
   "version": 5

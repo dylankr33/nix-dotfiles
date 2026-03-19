@@ -1,7 +1,6 @@
-let
-  sources = import ./npins;
-  pkgs = import sources.nixpkgs { };
-in
+{
+  pkgs ? <nixpkgs>,
+}:
 pkgs.mkShell {
   buildInputs = with pkgs; [
     nil

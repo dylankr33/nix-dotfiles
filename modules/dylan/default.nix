@@ -3,20 +3,24 @@
   dpkgs,
   lib,
   dlib,
-  hostVars,
   config,
-  options,
   ...
 }:
 {
-  options.dlib.users = lib.mkOption {
-    type = lib.types.listOf lib.types.str;
-    default = [ ];
-    description = ''
-      List of users.
-    '';
+  imports = [
+    ./dev.nix
+  ];
+  options = {
+    dlib.dylan.enable = lib.mkOption {
+      type = lib.types.bool;
+      default = false;
+    };
+    dlib.dylan.features = lib.mkOption {
+      type = lib.types.listOf lib.types.str;
+      default = [ ];
+    };
   };
-  config = lib.mkIf (builtins.elem "dylan" config.dlib.users) {
+  config = lib.mkIf config.dlib.dylan.enable {
     environment.persistence."/persist".users.dylan = {
       directories = [
         "Desktop"
@@ -41,66 +45,56 @@
       ];
       hashedPassword = "$y$j9T$8.fMAkhjGqlgJCqZqAo721$fGUuH27Y4ugQqfITSfNeFoibwQ9U8KCc5yzopIugbvB";
     };
-    hjem.users.dylan = {
-      enable = true;
-      packages =
-        with pkgs;
-        lib.mkIf config.dlib.desktop.enable [
-          zed-editor
+    hjem.users.dylan = lib.mkMerge [
+      {
+        enable = true;
+        packages = with pkgs; [
+          bat
+          tokei
+        ];
+      }
+      (lib.mkIf config.dlib.desktop.enable {
+        packages = with pkgs; [
+          obsidian
+          spotify
           gnomeExtensions.blur-my-shell
         ];
-      xdg.config.files = {
-        "zed/settings.json" = lib.mkIf config.dlib.desktop.enable {
-          generator = lib.generators.toJSON { };
-          value = {
-            disable_ai = true;
-            auto_install_extensions = {
-              github-dark-default = true;
-              nix = true;
-            };
-            theme = {
-              mode = "system";
-              light = "Ayu Light";
-              dark = "GitHub Dark Default";
-            };
-            buffer_font_size = hostVars.scalingFactor * 14;
-            ui_font_size = hostVars.scalingFactor * 16;
-          };
+        xdg.config.files = {
+          "dconf/user".source = lib.mkIf config.dlib.desktop.enable (
+            dlib.mkDconf {
+              "org/gnome/desktop/input-sources" = {
+                xkb-options = [
+                  "compose:ralt"
+                  "caps:ctrl_modifier"
+                ];
+              };
+              "org/gnome/desktop/interface" = {
+                accent-color = "pink";
+                color-scheme = "prefer-dark";
+                clock-format = "12h";
+              };
+              "org/gnome/desktop/background" = {
+                picture-uri = "${dpkgs.dWalls}/share/wallpapers/osaka.jpg";
+                picture-uri-dark = "${dpkgs.dWalls}/share/wallpapers/osaka.jpg";
+              };
+              "org/gnome/shell" = {
+                favorite-apps = [
+                  "helium.desktop"
+                  "Zed.desktop"
+                  "org.gnome.Nautilus.desktop"
+                  "org.gnome.Console.desktop"
+                ];
+                enabled-extensions = with pkgs.gnomeExtensions; [
+                  blur-my-shell.extensionUuid
+                ];
+              };
+              "org/gnome/shell/app-switcher" = {
+                current-workspace-only = true;
+              };
+            }
+          );
         };
-        "dconf/user".source = lib.mkIf config.dlib.desktop.enable (
-          dlib.mkDconf {
-            "org/gnome/desktop/input-sources" = {
-              xkb-options = [
-                "compose:ralt"
-                "caps:ctrl_modifier"
-              ];
-            };
-            "org/gnome/desktop/interface" = {
-              accent-color = "pink";
-              color-scheme = "prefer-dark";
-            };
-            "org/gnome/desktop/background" = {
-              picture-uri = "${dpkgs.dWalls}/share/wallpapers/osaka.jpg";
-              picture-uri-dark = "${dpkgs.dWalls}/share/wallpapers/osaka.jpg";
-            };
-            "org/gnome/shell" = {
-              favorite-apps = [
-                "helium.desktop"
-                "Zed.desktop"
-                "org.gnome.Nautilus.desktop"
-                "org.gnome.Console.desktop"
-              ];
-              enabled-extensions = [
-                pkgs.gnomeExtensions.blur-my-shell.extensionUuid
-              ];
-            };
-            "org/gnome/shell/app-switcher" = {
-              current-workspace-only = true;
-            };
-          }
-        );
-      };
-    };
+      })
+    ];
   };
-
 }
