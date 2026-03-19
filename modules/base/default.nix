@@ -1,10 +1,10 @@
 {
   pkgs,
   hostVars,
-  dlib,
   ...
 }:
 {
+  programs.fish.enable = true;
   networking.hostName = hostVars.hostname;
   hjem.clobberByDefault = true;
   programs.git = {
@@ -24,19 +24,24 @@
 
   programs.direnv = {
     enable = true;
-    enableBashIntegration = true;
+    enableFishIntegration = true;
   };
 
   nix = {
     package = pkgs.lixPackageSets.stable.lix;
     settings.experimental-features = "nix-command flakes";
-    registry.nixpkgs.to = {
-      type = "path";
-      path = dlib.nixpkgsPath;
+    registry.nixpkgs = {
+      to = {
+        type = "path";
+        path = pkgs.path;
+      };
     };
     channel.enable = false;
   };
-  nixpkgs.config.allowUnfree = true;
+  nixpkgs = {
+    flake.setFlakeRegistry = true;
+    config.allowUnfree = true;
+  };
 
   i18n.defaultLocale = "en_US.UTF-8";
   console = {

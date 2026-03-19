@@ -1,8 +1,9 @@
 {
-  pkgs ? <nixpkgs>,
+  sources ? import ./npins,
+  pkgs ? import sources.nixpkgs,
 }:
-pkgs.mkShell {
-  buildInputs = with pkgs; [
+pkgs.mkShellNoCC {
+  packages = with pkgs; [
     nil
     nixd
     npins

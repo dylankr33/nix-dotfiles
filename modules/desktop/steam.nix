@@ -1,9 +1,6 @@
 {
-  pkgs,
-  dpkgs,
   lib,
   config,
-  hostVars,
   ...
 }:
 {

@@ -1,3 +1,5 @@
+# A function that returns a path to a functioning dconf database
+
 {
   pkgs ? <nixpkgs>,
 }:

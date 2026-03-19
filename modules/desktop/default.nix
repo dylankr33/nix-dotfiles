@@ -19,6 +19,7 @@
     environment.persistence."/persist" = {
       directories = [
         "/etc/NetworkManager"
+        "/var/lib/bluetooth"
       ];
     };
     networking.networkmanager.enable = true;
@@ -71,10 +72,15 @@
         ];
       };
     };
-    fonts.fontconfig = {
-      enable = true;
-      allowBitmaps = true;
-      useEmbeddedBitmaps = true;
+    fonts = {
+      packages = with pkgs; [
+        scientifica
+      ];
+      fontconfig = {
+        enable = true;
+        allowBitmaps = true;
+        useEmbeddedBitmaps = true;
+      };
     };
     environment.systemPackages = with pkgs; [
       vesktop

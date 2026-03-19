@@ -42,27 +42,11 @@
       "url": "https://github.com/nix-community/impermanence/archive/7b1d382faf603b6d264f58627330f9faa5cba149.tar.gz",
       "hash": "1iip4kjrk09mnha9jhafvcg61g1d0g6pqnljzdp08zz6zk38jzyk"
     },
-    "lem": {
-      "type": "GitRelease",
-      "repository": {
-        "type": "GitHub",
-        "owner": "lem-project",
-        "repo": "lem"
-      },
-      "pre_releases": false,
-      "version_upper_bound": null,
-      "release_prefix": null,
-      "submodules": false,
-      "version": "v2.3.0",
-      "revision": "38bae05a03bd6e6394819873fe5414b38da4753d",
-      "url": "https://api.github.com/repos/lem-project/lem/tarball/v2.3.0",
-      "hash": "0qkgs6xnbbnyjh9i1zp9l5iw6zj4hlb2b42b272pbmxw6pd3zp4a"
-    },
     "nixpkgs": {
       "type": "Channel",
-      "name": "nixos-25.11",
-      "url": "https://releases.nixos.org/nixos/25.11/nixos-25.11.6913.fabb8c9deee2/nixexprs.tar.xz",
-      "hash": "192yghx16vawmwzrbvkm5d341g02ymjxcmk108m3xdsarafhx0cs"
+      "name": "nixpkgs-unstable",
+      "url": "https://releases.nixos.org/nixpkgs/nixpkgs-26.05pre963857.f8573b9c935c/nixexprs.tar.xz",
+      "hash": "0c6bafjvi2pd2djc5xqkzmq8j5gccya07ipsgyarfswayv6501b2"
     },
     "sprinkles": {
       "type": "Git",

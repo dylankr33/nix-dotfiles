@@ -41,32 +41,34 @@
       devShells.x86_64-linux.default = import ./shell.nix { inherit (inputs) pkgs; };
       nixosConfigurations =
         let
+          config.dlib.dylan = {
+            enable = true;
+            features = [ "dev" ];
+          };
           modules = with inputs; [
             undetected.nixosModules.default
             disko.nixosModules.default
             impermanence.nixosModules.default
             hjem.nixosModules.default
-            {
-              dlib = {
-                desktop = {
-                  enable = true;
-                  steam = true;
-                };
-                dylan = {
-                  enable = true;
-                  features = [ "dev" ];
-                };
-              };
-            }
           ];
           modulesPath = ./modules;
         in
         {
-          omnibook = dlib.mkHost {
-            inherit modules modulesPath;
-            hostname = "omnibook";
-            scalingFactor = 1.25;
-          };
+          omnibook =
+            let
+              settings = {
+                desktop = {
+                  enable = true;
+                  steam = true;
+                };
+              };
+            in
+            dlib.mkHost {
+              inherit modulesPath;
+              modules = modules ++ [ (config // { dlib = settings; }) ];
+              hostname = "omnibook";
+              scalingFactor = 1.25;
+            };
         };
     };
 }

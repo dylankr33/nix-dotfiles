@@ -37,6 +37,7 @@
       ];
     };
     users.users.dylan = {
+      shell = pkgs.fish;
       isNormalUser = true;
       extraGroups = [
         "realtime"
@@ -52,11 +53,13 @@
           bat
           tokei
         ];
+        xdg.config.files = {
+          "fish/config.fish".source = ./misc/config.fish;
+        };
       }
       (lib.mkIf config.dlib.desktop.enable {
         packages = with pkgs; [
           obsidian
-          spotify
           gnomeExtensions.blur-my-shell
         ];
         xdg.config.files = {
