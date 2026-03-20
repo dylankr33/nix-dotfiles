@@ -93,15 +93,16 @@
                   with pkgs.gnomeExtensions;
                   [
                     blur-my-shell
+                    dash-to-panel
                   ]
                 )
               );
             };
             "org/gnome/shell/extensions/dash-to-panel" = {
-              appicon-padding = lib.gvariant.mkUint32 8;
-              trans-use-dynamic-opacity = true;
-              trans-panel-opacity = lib.gvariant.mkDouble 40.0;
-              panel-sizes = ''{"0":72}'';
+              appicon-padding = lib.gvariant.mkInt32 8;
+              appicon-margin = lib.gvariant.mkInt32 2;
+              trans-use-custom-opacity = lib.gvariant.mkBoolean true;
+              panel-sizes = ''{"0":60}'';
             };
             "org/gnome/shell/app-switcher" = {
               current-workspace-only = true;

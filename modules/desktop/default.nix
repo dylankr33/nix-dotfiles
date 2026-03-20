@@ -29,34 +29,45 @@
     services.displayManager.gdm = {
       enable = true;
     };
-    environment.gnome.excludePackages = with pkgs; [
-      baobab
-      gnome-disk-utility
-      geary
-      seahorse
-      sushi
-      decibels
-      epiphany
-      gnome-text-editor
-      gnome-calculator
-      gnome-calendar
-      gnome-characters
-      gnome-clocks
-      gnome-contacts
-      gnome-font-viewer
-      gnome-logs
-      gnome-maps
-      gnome-music
-      gnome-system-monitor
-      gnome-weather
-      loupe
-      papers
-      gnome-connections
-      showtime
-      simple-scan
-      snapshot
-      yelp
-    ];
+    environment = {
+      sessionVariables = {
+        XDG_DATA_DIRS = map (f: "${f}/share/gnome-shell/extensions/${f.extensionUuid}/schemas") (
+          with pkgs.gnomeExtensions;
+          [
+            blur-my-shell
+            dash-to-panel
+          ]
+        );
+      };
+      gnome.excludePackages = with pkgs; [
+        baobab
+        gnome-disk-utility
+        geary
+        seahorse
+        sushi
+        decibels
+        epiphany
+        gnome-text-editor
+        gnome-calculator
+        gnome-calendar
+        gnome-characters
+        gnome-clocks
+        gnome-contacts
+        gnome-font-viewer
+        gnome-logs
+        gnome-maps
+        gnome-music
+        gnome-system-monitor
+        gnome-weather
+        loupe
+        papers
+        gnome-connections
+        showtime
+        simple-scan
+        snapshot
+        yelp
+      ];
+    };
     programs.dconf = {
       enable = true;
       profiles = {
