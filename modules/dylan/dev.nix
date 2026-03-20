@@ -7,7 +7,12 @@
 }:
 lib.mkIf (builtins.elem "dev" config.dlib.dylan.features) {
   hjem.users.dylan = {
-    packages = with pkgs; [ zed-editor ];
+    packages = with pkgs; [
+      zed-editor
+      nil
+      nixd
+      nixfmt
+    ];
     xdg.config.files = {
       "zed/settings.json" = lib.mkIf config.dlib.desktop.enable {
         generator = lib.generators.toJSON { };

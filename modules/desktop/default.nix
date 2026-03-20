@@ -82,10 +82,16 @@
         useEmbeddedBitmaps = true;
       };
     };
-    environment.systemPackages = with pkgs; [
-      vesktop
-      dpkgs.helium
-    ];
+    environment.systemPackages =
+      with pkgs;
+      [
+        vesktop
+        dpkgs.helium
+      ]
+      ++ (with pkgs.gnomeExtensions; [
+        blur-my-shell
+        dash-to-panel
+      ]);
   };
 
 }

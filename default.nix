@@ -41,9 +41,12 @@
       devShells.x86_64-linux.default = import ./shell.nix { inherit (inputs) pkgs; };
       nixosConfigurations =
         let
-          config.dlib.dylan = {
+          config.dylan = {
             enable = true;
-            features = [ "dev" ];
+            features = [
+              "dev"
+              "gaming"
+            ];
           };
           modules = with inputs; [
             undetected.nixosModules.default
@@ -54,21 +57,22 @@
           modulesPath = ./modules;
         in
         {
-          omnibook =
-            let
-              settings = {
-                desktop = {
-                  enable = true;
-                  steam = true;
+          omnibook = dlib.mkHost {
+            inherit modulesPath;
+            modules = modules ++ [
+              {
+                dlib = {
+                  desktop = {
+                    enable = true;
+                    steam = true;
+                  };
+                  inherit (config) dylan;
                 };
-              };
-            in
-            dlib.mkHost {
-              inherit modulesPath;
-              modules = modules ++ [ (config // { dlib = settings; }) ];
-              hostname = "omnibook";
-              scalingFactor = 1.25;
-            };
+              }
+            ];
+            hostname = "omnibook";
+            scalingFactor = 1.25;
+          };
         };
     };
 }
