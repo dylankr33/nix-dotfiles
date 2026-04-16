@@ -44,7 +44,6 @@
           config.dylan = {
             enable = true;
             features = [
-              "dev"
               "gaming"
             ];
           };

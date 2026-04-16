@@ -8,7 +8,6 @@
 }:
 {
   imports = [
-    ./dev.nix
     ./gaming.nix
   ];
   options = {

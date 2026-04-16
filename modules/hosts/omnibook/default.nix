@@ -1,5 +1,6 @@
 {
   fileSystems."/persist".neededForBoot = true;
+  fileSystems."/home".neededForBoot = true;
 
   time.timeZone = "America/Chicago";
   nixpkgs.hostPlatform = "x86_64-linux";
