@@ -57,6 +57,7 @@
                 extraArgs = [ "-f" ];
                 subvolumes = {
                   "/persist".mountpoint = "/persist";
+		  "/home".mountpoint = "/home";
                   "nix" = {
                     mountpoint = "/nix";
                     mountOptions = [ "noatime" ];

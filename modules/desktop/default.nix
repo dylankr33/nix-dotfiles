@@ -12,80 +12,20 @@
     type = lib.types.bool;
     default = false;
     description = ''
-      Enable the dlib gnome desktop.
+      Enable the dlib desktop.
     '';
   };
   config = lib.mkIf config.dlib.desktop.enable {
     environment.persistence."/persist" = {
       directories = [
-        "/etc/NetworkManager"
+        "/var/lib/iwd"
         "/var/lib/bluetooth"
       ];
     };
-    networking.networkmanager.enable = true;
-    services.desktopManager.gnome = {
-      enable = true;
-    };
-    services.displayManager.gdm = {
-      enable = true;
-    };
-    environment = {
-      sessionVariables = {
-        XDG_DATA_DIRS = map (f: "${f}/share/gnome-shell/extensions/${f.extensionUuid}/schemas") (
-          with pkgs.gnomeExtensions;
-          [
-            blur-my-shell
-            dash-to-panel
-          ]
-        );
-      };
-      gnome.excludePackages = with pkgs; [
-        baobab
-        gnome-disk-utility
-        geary
-        seahorse
-        sushi
-        decibels
-        epiphany
-        gnome-text-editor
-        gnome-calculator
-        gnome-calendar
-        gnome-characters
-        gnome-clocks
-        gnome-contacts
-        gnome-font-viewer
-        gnome-logs
-        gnome-maps
-        gnome-music
-        gnome-system-monitor
-        gnome-weather
-        loupe
-        papers
-        gnome-connections
-        showtime
-        simple-scan
-        snapshot
-        yelp
-      ];
-    };
-    programs.dconf = {
-      enable = true;
-      profiles = {
-        # A "user" profile with a database
-        user.databases = [
-          {
-            settings = {
-              "org/gnome/desktop/interface" = {
-                text-scaling-factor = hostVars.scalingFactor;
-              };
-            };
-          }
-        ];
-      };
-    };
+    networking.wireless.iwd.enable = true;
     fonts = {
       packages = with pkgs; [
-        scientifica
+        gelasio
       ];
       fontconfig = {
         enable = true;
@@ -98,11 +38,7 @@
       [
         vesktop
         dpkgs.helium
-      ]
-      ++ (with pkgs.gnomeExtensions; [
-        blur-my-shell
-        dash-to-panel
-      ]);
+      ];
   };
 
 }
